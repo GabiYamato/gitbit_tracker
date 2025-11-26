@@ -25,6 +25,12 @@ A beautiful, minimalist habit tracking app built with Flutter, featuring GitHub-
 - **Fast & Efficient**: Optimized for performance
 - **Privacy-First**: No cloud sync, your data stays on your device
 
+### 📲 Home Screen Widgets
+- **iOS Widgets**: Small, Medium, and Large sizes with WidgetKit
+- **Android Widgets**: Resizable home screen widgets
+- **Live Updates**: Widgets update automatically when habits change
+- **Quick Actions**: View progress at a glance without opening the app
+
 ## Project Structure
 
 ```
@@ -40,9 +46,33 @@ lib/
 │   ├── habit_progress_widget.dart     # GitHub-style progress visualization
 │   └── habit_completion_toggle.dart   # Checkbox for daily completion
 ├── services/
-│   └── habit_service.dart             # Habit CRUD operations
+│   ├── habit_service.dart             # Habit CRUD operations
+│   └── widget_service.dart            # Home screen widget management
 └── themes/
     └── app_theme.dart                 # Centralized theme configuration
+```
+
+### iOS Widget Files
+```
+ios/
+├── HabitWidget/
+│   ├── HabitWidget.swift              # iOS widget implementation
+│   └── Info.plist                     # Widget configuration
+└── Runner/
+    └── Runner.entitlements            # App Groups configuration
+```
+
+### Android Widget Files
+```
+android/app/src/main/
+├── kotlin/com/example/gitbit_tracker/widget/
+│   └── HabitWidgetProvider.kt         # Android widget provider
+└── res/
+    ├── layout/
+    │   ├── habit_widget.xml           # Widget layout
+    │   └── habit_item.xml             # Habit item layout
+    └── xml/
+        └── habit_widget_info.xml      # Widget metadata
 ```
 
 ## Getting Started
@@ -72,6 +102,21 @@ lib/
    ```bash
    flutter run
    ```
+
+### Setting Up Widgets
+
+**For detailed widget setup instructions, see:**
+- **[WIDGET_QUICK_START.md](WIDGET_QUICK_START.md)** - Quick setup guide
+- **[WIDGET_SETUP.md](WIDGET_SETUP.md)** - Complete configuration guide
+
+**Quick iOS Setup:**
+```bash
+cd ios
+open Runner.xcworkspace
+# Follow steps in WIDGET_QUICK_START.md
+```
+
+**Android widgets** are already configured and ready to use!
 
 ### Running Tests
 ```bash
@@ -138,21 +183,38 @@ Each habit card displays:
 ### Deleting a Habit
 Tap the delete icon on any habit card and confirm deletion.
 
-## Home Screen Widgets (Future Enhancement)
+### Using Home Screen Widgets
 
-The project includes `home_widget` package for native iOS/Android widgets:
+#### iOS Widgets
+1. **Add widget to home screen**:
+   - Long press on home screen
+   - Tap the `+` button
+   - Search for "Habit Tracker"
+   - Choose size (Small, Medium, Large)
+   - Add to Home Screen
 
-### Large Widget (Planned)
-- Shows all habits with their Material Icons
-- Displays progress bars for each habit
-- Quick visual overview of your habits
+2. **Widget Sizes**:
+   - **Small**: Single habit with 7-day progress
+   - **Medium**: 3 habits with progress bars
+   - **Large**: 6 habits with full details
 
-### Small Widget (Planned)
-- Single habit display
-- Swipe to switch between habits
-- Quick completion toggle
+#### Android Widgets
+1. **Add widget to home screen**:
+   - Long press on home screen
+   - Tap "Widgets"
+   - Find "Habit Tracker"
+   - Drag to home screen
 
-*Note: Widget implementation requires platform-specific configuration and will be added in future updates.*
+2. **Features**:
+   - Resizable widget
+   - Shows multiple habits
+   - Updates every 15 minutes
+
+## Widget Configuration
+
+For complete widget setup instructions, see:
+- **[WIDGET_QUICK_START.md](WIDGET_QUICK_START.md)** - Step-by-step quick guide
+- **[WIDGET_SETUP.md](WIDGET_SETUP.md)** - Detailed configuration and troubleshooting
 
 ## Dependencies
 

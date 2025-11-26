@@ -19,10 +19,13 @@ class HabitService {
 
   // Get habit by ID
   Habit? getHabitById(String id) {
-    return _habitBox.values.firstWhere(
-      (habit) => habit.id == id,
-      orElse: () => throw Exception('Habit not found'),
-    );
+    try {
+      return _habitBox.values.firstWhere(
+        (habit) => habit.id == id,
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   // Add new habit

@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:gitbit_tracker/main.dart';
 import 'package:gitbit_tracker/services/habit_service.dart';
+import 'package:gitbit_tracker/services/widget_service.dart';
 
 void main() {
   testWidgets('App starts with no habits', (WidgetTester tester) async {
@@ -17,8 +18,15 @@ void main() {
     await habitService.init();
     await habitService.clearAllHabits();
 
+    // Initialize widget service
+    final widgetService = WidgetService(habitService);
+    await widgetService.init();
+
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(habitService: habitService));
+    await tester.pumpWidget(MyApp(
+      habitService: habitService,
+      widgetService: widgetService,
+    ));
 
     // Verify that we see the empty state
     expect(find.text('No habits yet'), findsOneWidget);

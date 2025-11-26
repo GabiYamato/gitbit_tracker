@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/habit.dart';
 import '../services/habit_service.dart';
+import '../services/widget_service.dart';
 import '../widgets/habit_progress_widget.dart';
 import '../widgets/habit_completion_toggle.dart';
 import 'add_habit_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final HabitService habitService;
+  final WidgetService widgetService;
 
-  const HomeScreen({super.key, required this.habitService});
+  const HomeScreen({
+    super.key,
+    required this.habitService,
+    required this.widgetService,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -89,7 +95,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   habit: habit,
                   viewType: _viewType,
                   onDelete: () => _deleteHabit(habit),
-                  onToggle: () => setState(() {}),
+                  onToggle: () {
+                    setState(() {});
+                    widget.widgetService.updateWidgets();
+                  },
                 ),
               );
             },
@@ -112,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     if (result == true) {
       setState(() {});
+      widget.widgetService.updateWidgets();
     }
   }
 
@@ -139,6 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (confirmed == true) {
       await widget.habitService.deleteHabit(habit.id);
+      widget.widgetService.updateWidgets();
     }
   }
 }
