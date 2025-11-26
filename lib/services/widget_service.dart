@@ -18,7 +18,7 @@ class WidgetService {
   /// Update all widgets with current habit data
   Future<void> updateWidgets() async {
     final habits = habitService.getAllHabits();
-    
+
     print('📱 Updating widgets with ${habits.length} habits');
 
     // Send data to widgets
@@ -30,7 +30,7 @@ class WidgetService {
       iOSName: widgetName,
       androidName: widgetName,
     );
-    
+
     print('✅ Widget update complete');
   }
 
@@ -71,8 +71,10 @@ class WidgetService {
         '${prefix}_completed_today',
         habit.isCompletedOnDate(DateTime.now()),
       );
-      
-      print('💾 Saved habit $i: ${habit.name} (streak: ${habit.getCurrentStreak()})');
+
+      print(
+        '💾 Saved habit $i: ${habit.name} (streak: ${habit.getCurrentStreak()})',
+      );
     }
   }
 

@@ -23,10 +23,9 @@ void main() {
     await widgetService.init();
 
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(
-      habitService: habitService,
-      widgetService: widgetService,
-    ));
+    await tester.pumpWidget(
+      MyApp(habitService: habitService, widgetService: widgetService),
+    );
 
     // Verify that we see the empty state
     expect(find.text('No habits yet'), findsOneWidget);

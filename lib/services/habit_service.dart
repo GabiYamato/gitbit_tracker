@@ -20,9 +20,7 @@ class HabitService {
   // Get habit by ID
   Habit? getHabitById(String id) {
     try {
-      return _habitBox.values.firstWhere(
-        (habit) => habit.id == id,
-      );
+      return _habitBox.values.firstWhere((habit) => habit.id == id);
     } catch (e) {
       return null;
     }
